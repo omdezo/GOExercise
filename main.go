@@ -72,6 +72,33 @@ func InputConverterCF() (float64 ,error){
 	}
 	return float64(num), nil
 }
+func InputDiscounter() (float64 ,error){
+	reader := bufio.NewReader(os.Stdin)
+	input, err := getInput("Enter the price: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	num, err := strconv.Atoi(input)
+	if err != nil {
+		return 0, err
+	}
+	return float64(num), nil
+}
+
+func InputGradingSystem() (int, error) {
+	reader := bufio.NewReader(os.Stdin)
+	input, err := getInput("Enter a number: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	number, err := strconv.Atoi(input)
+	if err != nil {
+		return 0, err
+	}
+	return number, nil
+}
+
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -79,7 +106,9 @@ func main() {
 		fmt.Println("1. Even or Odd")
 		fmt.Println("2. Largest of Three")
 		fmt.Println("3. Celsius Converter to Fahrenheit")
-		fmt.Println("4. Exit Program")
+		fmt.Println("4. Simple Discounter Calculater")
+		fmt.Println("5. Grading System")
+		fmt.Println("6. Exit Program")
 
 		choice, err := getInput("Choose a program : ", reader)
 		if err != nil {
@@ -88,7 +117,7 @@ func main() {
 		}
 
 		
-		if choice == "4" {
+		if choice == "6" {
 			fmt.Println("Goodbye!")
 			break 
 		}
@@ -120,6 +149,22 @@ func main() {
 			} else {
 				easy.ConvTemp(C)
 			}
+		case "4":
+			fmt.Println("\n Running: Simple Discounter Calculator ")
+			score, err := InputDiscounter()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid whole number.")
+			} else {
+				easy.Discounter(score)
+			}
+		case "5":
+			fmt.Println("\n Running: Grading System ")
+			price, err := InputGradingSystem()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid whole number.")
+			} else {
+				easy.GradingSys(price)
+			}		
 		default:
 			
 			fmt.Printf("\n'%s' is not a valid option. Please try again.\n", choice)
