@@ -60,23 +60,35 @@ func InputLargestThree() (int, int, int, error) {
 
 	return n1, n2, n3, nil
 }
-
+func InputConverterCF() (float64 ,error){
+	reader := bufio.NewReader(os.Stdin)
+	input, err := getInput("Enter a Temperature in Celsius: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	num, err := strconv.Atoi(input)
+	if err != nil {
+		return 0, err
+	}
+	return float64(num), nil
+}
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
 		fmt.Println("1. Even or Odd")
 		fmt.Println("2. Largest of Three")
-		fmt.Println("3. Exit Program")
+		fmt.Println("3. Celsius Converter to Fahrenheit")
+		fmt.Println("4. Exit Program")
 
-		choice, err := getInput("Choose a program (1, 2, or 3): ", reader)
+		choice, err := getInput("Choose a program : ", reader)
 		if err != nil {
 			fmt.Println("Error reading choice:", err)
 			continue 
 		}
 
 		
-		if choice == "3" {
+		if choice == "4" {
 			fmt.Println("Goodbye!")
 			break 
 		}
@@ -87,7 +99,7 @@ func main() {
 			fmt.Println("\n Running: Even or Odd Program ")
 			number, err := InputOddEven()
 			if err != nil {
-				fmt.Println("Oops! That wasn't a valid whole number.")
+				fmt.Println("Oops haha That wasn't a valid whole number.")
 			} else {
 				easy.CheckEvenOrOdd(number)
 			}
@@ -96,11 +108,18 @@ func main() {
 			fmt.Println("\n Running: Largest of Three Program ")
 			num1, num2, num3, err := InputLargestThree()
 			if err != nil {
-				fmt.Println("Oops! One of your inputs wasn't a valid whole number.")
+				fmt.Println("Oops haha One of your inputs wasn't a valid whole number.")
 			} else {
 				easy.FindLargestThree(num1, num2, num3)
 			}
-
+		case "3":
+			fmt.Println("\n Running: Celsius Converter to Fahrenheit ")
+			C, err := InputConverterCF()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid whole number.")
+			} else {
+				easy.ConvTemp(C)
+			}
 		default:
 			
 			fmt.Printf("\n'%s' is not a valid option. Please try again.\n", choice)
