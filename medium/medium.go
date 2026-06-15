@@ -50,6 +50,32 @@ func InputAtm(reader *bufio.Reader) (float64, float64, string, error) {
 
 	return num1, num2, choice, nil
 }
+func InputFact(reader *bufio.Reader) (int, error) {
+
+	in1, err := getInput("Enter the number: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
+func InputSumEvenOdd(reader *bufio.Reader) (int, error) {
+
+	in1, err := getInput("Enter a Number: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
 func Medium(reader *bufio.Reader) {
 	for {
 		fmt.Println("\n--- Medium Exercises Menu ---")
@@ -84,10 +110,24 @@ func Medium(reader *bufio.Reader) {
 			}
 
 		case "2":
-			fmt.Println("\n Running: Factorial of a Number (Coming Soon)")
+			fmt.Println("\n=== Running: Factorial of a Number ===")
+			num, err := InputFact(reader)
+			if err != nil {
+				fmt.Println("Factorial Error:", err)
+			} else {
+				result := fact(num)
+				fmt.Printf("The Factorial of %d is: %d\n", num, result)
+			}
 
 		case "3":
-			fmt.Println("\n Running: Sum of Even and Odd Numbers (Coming Soon)")
+			fmt.Println("\n=== Running: Factorial of a Number ===")
+			num, err := InputSumEvenOdd(reader)
+			if err != nil {
+				fmt.Println("Factorial Error:", err)
+			} else {
+				SumOddEven(num)
+			}
+			
 
 		case "4":
 			fmt.Println("\n Running: Guess Game with helper (Coming Soon)")
