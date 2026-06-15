@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"exercise-go/easy"
 	"exercise-go/medium"
+	"exercise-go/hard"
 	"fmt"
 	"os"
 	"strings"
@@ -15,20 +16,20 @@ func getInput(prompt string, r *bufio.Reader) (string, error) {
 	return strings.TrimSpace(input), err
 }
 
-// Temporary placeholder until you build out your medium menu file
+
 func runMediumMenu(reader *bufio.Reader) {
 	fmt.Println("\n -  Medium Exercises Menu -")
-	medium.MediumPlaceholder() // Calls your medium package logic
+	medium.Medium(reader) 
 	getInput("\nPress Enter to return to the main menu...", reader)
 }
 func runHardMenu(reader *bufio.Reader) {
 	fmt.Println("\n--- Hard Exercises Menu ---")
-	hard.HardPlaceholder() // Calls your medium package logic
+	hard.HardPlaceholder() 
 	getInput("\nPress Enter to return to the main menu...", reader)
 }
 
 func main() {
-	// This is the ONE reader that all menus will share
+
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
