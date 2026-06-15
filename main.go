@@ -98,7 +98,34 @@ func InputGradingSystem() (int, error) {
 	return number, nil
 }
 
+func InputSwapped() (int, error) {
+	reader := bufio.NewReader(os.Stdin)
 
+	in1, err := getInput("Enter number (2 Digits) to swap them: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
+func InputDays() (int, error) {
+	reader := bufio.NewReader(os.Stdin)
+
+	in1, err := getInput("Enter number of days: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -108,7 +135,9 @@ func main() {
 		fmt.Println("3. Celsius Converter to Fahrenheit")
 		fmt.Println("4. Simple Discounter Calculater")
 		fmt.Println("5. Grading System")
-		fmt.Println("6. Exit Program")
+		fmt.Println("6. Swap Two Numbers")
+		fmt.Println("7. Days to Weeks Converter")
+		fmt.Println("8. Exit Program")
 
 		choice, err := getInput("Choose a program : ", reader)
 		if err != nil {
@@ -117,7 +146,7 @@ func main() {
 		}
 
 		
-		if choice == "6" {
+		if choice == "8" {
 			fmt.Println("Goodbye!")
 			break 
 		}
@@ -165,6 +194,22 @@ func main() {
 			} else {
 				easy.GradingSys(price)
 			}		
+		case "6":
+			fmt.Println("\n Running: Swap two numbers ")
+			number, err := InputSwapped()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid number.")
+			} else {
+				easy.Swaptwo(number)
+			}		
+		case "7":
+			fmt.Println("\n Running: Days to weeks Converter")
+			days, err := InputDays()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid number.")
+			} else {
+				easy.DaysToweeksconv(days)
+			}
 		default:
 			
 			fmt.Printf("\n'%s' is not a valid option. Please try again.\n", choice)
