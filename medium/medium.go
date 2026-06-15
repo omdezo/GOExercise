@@ -102,6 +102,30 @@ func InputPattern(reader *bufio.Reader) (int, error) {
 
 	return n1, nil
 }
+func InputpPyramidPattern(reader *bufio.Reader) (int, error) {
+
+	in1, err := getInput("input number of *: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
+func InputDiamond(reader *bufio.Reader) (int, error) {
+    in1, err := getInput("Enter the size of the Diamond (N): ", reader)
+    if err != nil {
+        return 0, err
+    }
+    n1, err := strconv.Atoi(in1)
+    if err != nil {
+        return 0, err
+    }
+    return n1, nil
+}
 func Medium(reader *bufio.Reader) {
 	for {
 		fmt.Println("\n--- Medium Exercises Menu ---")
@@ -171,10 +195,22 @@ func Medium(reader *bufio.Reader) {
             }
 
 		case "6":
-			fmt.Println("\n Running: Print a Pyramid Pattern (Coming Soon)")
+			fmt.Println("\n=== Running: Print Pyramid Pattern ===")
+            num, err := InputpPyramidPattern(reader)
+            if err != nil {
+                fmt.Println("Pattern Error:", err)
+            } else {
+                PrintPrymidPattern(num)
+            }
 
 		case "7":
-			fmt.Println("\n Running: Print a Diamond Pattern (Coming Soon)")
+			fmt.Println("\n=== Running: Print a Diamond Pattern ===")
+            num, err := InputDiamond(reader)
+            if err != nil {
+                fmt.Println("Diamond Error:", err)
+            } else {
+                PrintDiamond(num)
+            }
 
 		default:
 			fmt.Printf("\n'%s' is not a valid option. Please try again.\n", choice)
