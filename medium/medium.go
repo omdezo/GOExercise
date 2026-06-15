@@ -76,6 +76,32 @@ func InputSumEvenOdd(reader *bufio.Reader) (int, error) {
 
 	return n1, nil
 }
+func InputGameGuess(reader *bufio.Reader) (int, error) {
+
+	in1, err := getInput("Guess a Number: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
+func InputPattern(reader *bufio.Reader) (int, error) {
+
+	in1, err := getInput("input number of *: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return n1, nil
+}
 func Medium(reader *bufio.Reader) {
 	for {
 		fmt.Println("\n--- Medium Exercises Menu ---")
@@ -130,10 +156,19 @@ func Medium(reader *bufio.Reader) {
 			
 
 		case "4":
-			fmt.Println("\n Running: Guess Game with helper (Coming Soon)")
+			fmt.Println("\n=== Guess Game ===")
+			
+			Randomguess(reader)
+
 
 		case "5":
-			fmt.Println("\n Running: Print Pattern (Coming Soon)")
+            fmt.Println("\n=== Running: Print Pattern ===")
+            num, err := InputPattern(reader)
+            if err != nil {
+                fmt.Println("Pattern Error:", err)
+            } else {
+                PrintPattern(num)
+            }
 
 		case "6":
 			fmt.Println("\n Running: Print a Pyramid Pattern (Coming Soon)")
