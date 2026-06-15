@@ -126,6 +126,22 @@ func InputDays() (int, error) {
 
 	return n1, nil
 }
+
+func InputELec() (float64, error) {
+	reader := bufio.NewReader(os.Stdin)
+
+	in1, err := getInput("Enter number of Units: ", reader)
+	if err != nil {
+		return 0, err
+	}
+	n1, err := strconv.Atoi(in1)
+	if err != nil {
+		return 0, err
+	}
+
+	return float64(n1), nil
+}
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -137,7 +153,8 @@ func main() {
 		fmt.Println("5. Grading System")
 		fmt.Println("6. Swap Two Numbers")
 		fmt.Println("7. Days to Weeks Converter")
-		fmt.Println("8. Exit Program")
+		fmt.Println("8. Electricity Bill Calculator")
+		fmt.Println("9. Exit Program")
 
 		choice, err := getInput("Choose a program : ", reader)
 		if err != nil {
@@ -146,7 +163,7 @@ func main() {
 		}
 
 		
-		if choice == "8" {
+		if choice == "9" {
 			fmt.Println("Goodbye!")
 			break 
 		}
@@ -209,6 +226,14 @@ func main() {
 				fmt.Println("Oops haha That wasn't a valid number.")
 			} else {
 				easy.DaysToweeksconv(days)
+			}
+		case "8":
+			fmt.Println("\n Running: Electricity Bill Calculator")
+			amount, err := InputELec()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid number.")
+			} else {
+				easy.ElecBill(amount)
 			}
 		default:
 			
