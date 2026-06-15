@@ -142,6 +142,42 @@ func InputELec() (float64, error) {
 	return float64(n1), nil
 }
 
+func InputCalculator() (float64, float64, string, error) {
+	reader := bufio.NewReader(os.Stdin)
+
+	// Ask for the full mathematical equation
+	input, err := getInput("Enter expression : ", reader)
+	if err != nil {
+		return 0, 0, "", err
+	}
+
+	// strings.Fields splits the string into slices using spaces as dividers
+	// Example: "123 + 11" becomes ["123", "+", "11"]
+	parts := strings.Fields(input)
+	
+	// If the user didn't provide exactly 3 parts, throw an error
+	if len(parts) != 3 {
+		return 0, 0, "", fmt.Errorf("please use spaces (Format: number [space] operator [space] number)")
+	}
+
+	// Parse the first number
+	n1, err := strconv.ParseFloat(parts[0], 64)
+	if err != nil {
+		return 0, 0, "", fmt.Errorf("'%s' is not a valid number", parts[0])
+	}
+
+	// Capture the operator string from the middle position
+	op := parts[1]
+
+	// Parse the second number
+	n2, err := strconv.ParseFloat(parts[2], 64)
+	if err != nil {
+		return 0, 0, "", fmt.Errorf("'%s' is not a valid number", parts[2])
+	}
+
+	return n1, n2, op, nil
+}
+
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -154,7 +190,8 @@ func main() {
 		fmt.Println("6. Swap Two Numbers")
 		fmt.Println("7. Days to Weeks Converter")
 		fmt.Println("8. Electricity Bill Calculator")
-		fmt.Println("9. Exit Program")
+		fmt.Println("9. Simple Calculator")
+		fmt.Println("10. Exit Program")
 
 		choice, err := getInput("Choose a program : ", reader)
 		if err != nil {
@@ -163,7 +200,7 @@ func main() {
 		}
 
 		
-		if choice == "9" {
+		if choice == "10" {
 			fmt.Println("Goodbye!")
 			break 
 		}
@@ -234,6 +271,14 @@ func main() {
 				fmt.Println("Oops haha That wasn't a valid number.")
 			} else {
 				easy.ElecBill(amount)
+			}
+		case "9":
+			fmt.Println("\n Running: Simple Calculator")
+			num1, num2, op, err := InputCalculator()
+			if err != nil {
+				fmt.Println("Oops haha That wasn't a valid number.")
+			} else {
+				easy.Calcul(num1, num2, op)
 			}
 		default:
 			
