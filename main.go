@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"exercise-go/easy"
+	"exercise-go/medium"
 	"fmt"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -15,103 +15,49 @@ func getInput(prompt string, r *bufio.Reader) (string, error) {
 	return strings.TrimSpace(input), err
 }
 
-func InputOddEven() (int, error) {
-	reader := bufio.NewReader(os.Stdin)
-	input, err := getInput("Enter a number: ", reader)
-	if err != nil {
-		return 0, err
-	}
-	number, err := strconv.Atoi(input)
-	if err != nil {
-		return 0, err
-	}
-	return number, nil
+// Temporary placeholder until you build out your medium menu file
+func runMediumMenu(reader *bufio.Reader) {
+	fmt.Println("\n -  Medium Exercises Menu -")
+	medium.MediumPlaceholder() // Calls your medium package logic
+	getInput("\nPress Enter to return to the main menu...", reader)
 }
-
-func InputLargestThree() (int, int, int, error) {
-	reader := bufio.NewReader(os.Stdin)
-
-	in1, err := getInput("Enter first number: ", reader)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-	n1, err := strconv.Atoi(in1)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-
-	in2, err := getInput("Enter second number: ", reader)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-	n2, err := strconv.Atoi(in2)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-
-	in3, err := getInput("Enter third number: ", reader)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-	n3, err := strconv.Atoi(in3)
-	if err != nil {
-		return 0, 0, 0, err
-	}
-
-	return n1, n2, n3, nil
+func runHardMenu(reader *bufio.Reader) {
+	fmt.Println("\n--- Hard Exercises Menu ---")
+	hard.HardPlaceholder() // Calls your medium package logic
+	getInput("\nPress Enter to return to the main menu...", reader)
 }
 
 func main() {
+	// This is the ONE reader that all menus will share
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println("1. Even or Odd")
-		fmt.Println("2. Largest of Three")
-		fmt.Println("3. Exit Program")
+		fmt.Println("\n CHOOSE YOUR DIFFICULTY ")
+		fmt.Println("1. Easy Exercises")
+		fmt.Println("2. Medium Exercises")
+		fmt.Println("3. Hard Exercises")
+		fmt.Println("4. Shut Down Program")
 
-		choice, err := getInput("Choose a program (1, 2, or 3): ", reader)
+		difficulty, err := getInput("Select an option (1-4): ", reader)
 		if err != nil {
-			fmt.Println("Error reading choice:", err)
-			continue 
-		}
-
-		
-		if choice == "3" {
-			fmt.Println("Goodbye!")
-			break 
-		}
-
-		
-		switch choice {
-		case "1":
-			fmt.Println("\n Running: Even or Odd Program ")
-			number, err := InputOddEven()
-			if err != nil {
-				fmt.Println("Oops! That wasn't a valid whole number.")
-			} else {
-				easy.CheckEvenOrOdd(number)
-			}
-
-		case "2":
-			fmt.Println("\n Running: Largest of Three Program ")
-			num1, num2, num3, err := InputLargestThree()
-			if err != nil {
-				fmt.Println("Oops! One of your inputs wasn't a valid whole number.")
-			} else {
-				easy.FindLargestThree(num1, num2, num3)
-			}
-
-		default:
-			
-			fmt.Printf("\n'%s' is not a valid option. Please try again.\n", choice)
+			fmt.Println("Error reading input.")
 			continue
 		}
 
-		
-		again, _ := getInput("\nWould you like to return to the main menu? (y/n): ", reader)
-		if strings.ToLower(again) != "y" && strings.ToLower(again) != "yes" {
-			fmt.Println("Goodbye!")
-			break 
+		if difficulty == "4" {
+			fmt.Println("Shutting down CLI app. Goodbye!")
+			break
+		}
+
+		switch difficulty {
+		case "1":
+			easy.Easy(reader) 
+		case "2":
+			runMediumMenu(reader)
+		case "3":
+			runHardMenu(reader)
+		default:
+			fmt.Printf("\n'%s' is not a valid tier. Try again.\n", difficulty)
 		}
 	}
 }
