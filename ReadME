@@ -1,1 +1,40 @@
-yo it's my project 
+GO Exercise Collection
+(Implemented during rihal intern period)
+
+Brief
+-----
+This repository is a small collection of CLI exercises written in Go. It's meant as a hands-on learning playground to get comfortable with basic Go features: packages, functions, slices/arrays, maps, structs, and standard input/output.
+
+What this does
+--------------
+- Provides three difficulty tiers: `easy`, `medium`, and `hard`.
+- Each tier exposes a menu-driven CLI you can run from `main.go`.
+- Exercises are intentionally small and focus on core language constructs and basic algorithms (sorting, searching, string handling, simple data structures).
+
+How to run
+----------
+1. Install Go (1.18+ recommended).
+2. From the repository root run "go run main.go"
+
+This starts the CLI. Choose a difficulty and follow prompts. Each exercise will ask for input and print results.
+
+Directory layout (important files)
+
+- `main.go` — entry point and main menu selector.
+- `easy/` — beginner exercises and `Easy(reader *bufio.Reader)` menu.
+- `medium/` — intermediate exercises and `Medium(reader *bufio.Reader)` menu.
+- `hard/` — advanced exercises split into submodules (arrays, strings, maps, structs).
+- `go.mod` — module file.
+
+Small dictionary (terms used in the CLI)
+--------------------------------------
+- getInput: helper function that prompts the user and returns trimmed input from stdin.
+- Input* functions: small wrappers that read and validate specific inputs (mirrors style from `easy`/`medium`).
+- Hard/Medium/Easy: package-level functions that accept a `*bufio.Reader` and run a menu loop.
+- Press Enter to continue: after an exercise finishes, you will usually press Enter to return to the submenu.
+
+Notes and next steps
+--------------------
+- The project is intentionally minimal and educational so you can do it by your self also.
+
+Enjoy learning Go!
