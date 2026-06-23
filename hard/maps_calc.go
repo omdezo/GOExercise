@@ -1,8 +1,6 @@
 package hard
 
-// Maps helpers: pure functions that operate on maps data structures.
 
-// CalcAddOrUpdateInventory sets quantity for a product.
 func CalcAddOrUpdateInventory(inv map[string]int, product string, qty int) {
 	inv[product] = qty
 }

@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    image: exercise-go
+    container_name: exercise-go
+    stdin_open: true
+    tty: true
